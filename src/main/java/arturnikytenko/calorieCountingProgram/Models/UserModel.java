@@ -9,7 +9,7 @@ import java.util.Date;
 
 //TODO connections
 @Entity
-public class User {
+public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -43,7 +43,7 @@ public class User {
     private double weightToChange;
     private String gender;
 
-    public User() {
+    public UserModel() {
     }
 
     public int getId() {
@@ -132,5 +132,13 @@ public class User {
 
     public void setTimeToReachGoal(Date timeToReachGoal) {
         this.timeToReachGoal = timeToReachGoal;
+    }
+
+    public double getWeightToChange() {
+        return weightToChange;
+    }
+
+    public void setWeightToChange(double weightToChange) {
+        this.weightToChange = weightToChange;
     }
 }

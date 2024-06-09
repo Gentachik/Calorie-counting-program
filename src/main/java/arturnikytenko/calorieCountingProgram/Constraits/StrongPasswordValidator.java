@@ -4,17 +4,17 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 public class StrongPasswordValidator implements
-        ConstraintValidator<StrongPasswordConstraint, String> {
+        ConstraintValidator<StrongPassword, String> {
 
     @Override
-    public void initialize(StrongPasswordConstraint contactNumber) {
+    public void initialize(StrongPassword contactNumber) {
     }
 
     @Override
-    public boolean isValid(String contactField,
+    public boolean isValid(String password,
                            ConstraintValidatorContext cxt) {
-        return contactField != null && contactField.matches("[0-9]+")
-                && (contactField.length() > 8) && (contactField.length() < 14);
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\\d])(?=\\S+$).{8,}$";
+        return password.matches(passwordPattern);
     }
 
 }

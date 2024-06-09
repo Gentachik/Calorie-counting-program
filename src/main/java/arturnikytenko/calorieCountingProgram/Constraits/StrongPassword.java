@@ -9,8 +9,8 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = StrongPasswordValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface StrongPasswordConstraint {
-    String message() default "Weak password";
+public @interface StrongPassword {
+    String message() default "Password must contain at least one uppercase letter, one lowercase letter, one special character, and no spaces";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script type="module" src="/goal.js"></script>
 </head>
 <body>
-$END$
+<form th:action="@{/register}" th:object="${registerUserDTO}" method="post">
+    <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{firstName}" required />
+        <p class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Invalid first name!</p>
+    </div>
+    <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{lastName}" required />
+        <p class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Invalid last name!</p>
+    </div>
+    <div>
+        <label for="age">Age:</label>
+        <input type="number" id="age" th:field="*{age}" required />
+        <p class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" th:min="18">Invalid age!</p>
+    </div>
+    <div>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" th:field="*{weight}" required />
+        <p class="error" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" th:min="1" th:max="1000">Invalid weight!</p>
+    </div>
+    <div>
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" th:field="*{height}" required />
+        <p class="error" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" th:min="1" th:max="300">Invalid height!</p>
+    </div>
+    <div class="goal">
+        <label for="goal">Goal:</label>
+        <select id="goal" th:field="*{goal}" required>
+            <option value="" disabled>Select goal</option>
+            <option th:each="goal : ${T(arturnikytenko.calorieCountingProgram.Util.Goal).values()}"
+                    th:value="${goal}" th:text="${goal}">Goal</option>
+        </select>
+    </div>
+    <input type="hidden" th:field="*{email}" />
+    <input type="hidden" th:field="*{password}" />
+    <div>
+        <button type="submit">Register</button>
+    </div>
+</form>
 </body>
 </html>

@@ -1,5 +1,6 @@
-package arturnikytenko.calorieCountingProgram.Models.DTOs;
+package arturnikytenko.calorieCountingProgram.Models.UserDTOs;
 
+import arturnikytenko.calorieCountingProgram.Constraits.StrongPassword;
 import arturnikytenko.calorieCountingProgram.Util.Goal;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -29,6 +30,7 @@ public class RegisterUserDTO {
     private String email;
     @NotBlank
     @Size(min = 8, message = "Password must be at least 8 characters long")
+    @StrongPassword
     private String password;
 
     public String getFirstName() {

@@ -1,5 +1,6 @@
-package arturnikytenko.calorieCountingProgram.Models.DTOs;
+package arturnikytenko.calorieCountingProgram.Models.UserDTOs;
 
+import arturnikytenko.calorieCountingProgram.Constraits.StrongPassword;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -10,6 +11,7 @@ public class PreRegisterUserDTO {
     private String email;
     @NotBlank
     @Size(min = 8, message = "Password must be at least 8 characters long")
+    @StrongPassword
     private String password;
     @NotBlank(message = "Repeat password is required")
     private String repeatPassword;

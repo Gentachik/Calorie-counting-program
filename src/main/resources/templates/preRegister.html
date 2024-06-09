@@ -5,26 +5,28 @@
     <title>Register</title>
 </head>
 <body>
-<form action="#" th:action="@{/register}" th:object="${preRegisterUserDTO}" method="post">
-    <label>
-        Email:
-        <input type="email" placeholder="Email" id="email" th:field="*{email}">
-    </label>
-    <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid email!</p>
+<form action="#" th:action="@{/preRegister}" th:object="${preRegisterUserDTO}" method="post">
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" placeholder="Email" id="email" th:field="*{email}" required />
+        <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid email!</p>
+    </div>
 
-    <label>
-        Password:
-        <input type="password" placeholder="Password" id="password" th:field="*{password}">
-    </label>
-    <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Weak password!</p>
+    <div>
+        <label for="password">Password:</label>
+        <input type="text" placeholder="Password" id="password" th:field="*{password}" th:min="8" required />
+        <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid password!</p>
+    </div>
 
-    <label>
-        Repeat password:
-        <input type="password" placeholder="Repeat password" id="repeatPassword" th:field="*{repeatPassword}">
-    </label>
-    <p class="error" th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}">Passwords don't match!</p>
+    <div>
+        <label for="repeatPassword">Repeat password:</label>
+        <input type="password" placeholder="Repeat password" id="repeatPassword" th:field="*{repeatPassword}" required />
+        <p class="error" th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}">Invalid repeat password!</p>
+    </div>
 
-    <button type="submit">Register</button>
+    <div>
+        <button type="submit">Proceed</button>
+    </div>
 </form>
 </body>
 </html>

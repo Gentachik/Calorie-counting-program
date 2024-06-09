@@ -1,2 +1,7 @@
-package arturnikytenko.calorieCountingProgram.Util;public enum Goal {
+package arturnikytenko.calorieCountingProgram.Util;
+
+public enum Goal {
+    maintainWeight,
+    gainWeight,
+    loseWeight
 }
