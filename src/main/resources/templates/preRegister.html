@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<form action="#" th:action="@{/register}" th:object="${preRegisterUserDTO}" method="post">
+    <label>
+        Email:
+        <input type="email" placeholder="Email" id="email" th:field="*{email}">
+    </label>
+    <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid email!</p>
+
+    <label>
+        Password:
+        <input type="password" placeholder="Password" id="password" th:field="*{password}">
+    </label>
+    <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Weak password!</p>
+
+    <label>
+        Repeat password:
+        <input type="password" placeholder="Repeat password" id="repeatPassword" th:field="*{repeatPassword}">
+    </label>
+    <p class="error" th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}">Passwords don't match!</p>
+
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>
