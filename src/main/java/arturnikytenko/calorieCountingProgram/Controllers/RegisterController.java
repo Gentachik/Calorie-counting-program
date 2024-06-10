@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Objects;
 
@@ -59,13 +60,13 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String registrationForm(@Valid @ModelAttribute("registerUserDTO") RegisterUserDTO registerUserDTO,
-                                   @RequestParam(value = "weightToChange", required = false, defaultValue = "0") double weightToChange,
-                                   BindingResult bindingResult) {
+    public RedirectView registrationForm(@Valid @ModelAttribute("registerUserDTO") RegisterUserDTO registerUserDTO,
+                                         @RequestParam(value = "weightToChange", required = false, defaultValue = "0") double weightToChange,
+                                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "register";
+            return new RedirectView("register");
         }
-        registerService.save(registerUserDTO, weightToChange);
-        return "redirect:/preRegister";
+        int id = registerService.save(registerUserDTO, weightToChange);
+        return new RedirectView("/profile/" + id);
     }
 }

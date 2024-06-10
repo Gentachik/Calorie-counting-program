@@ -21,7 +21,7 @@ public class RegisterService {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    public void save(RegisterUserDTO registerUserDTO, double weightToChange) {
+    public int save(RegisterUserDTO registerUserDTO, double weightToChange) {
         UserModel user = new UserModel();
         user.setEmail(registerUserDTO.getEmail());
         user.setPassword(registerUserDTO.getPassword());
@@ -42,6 +42,6 @@ public class RegisterService {
             user.setWeightToChange(0);
         }
         user.setTimeToReachGoal(date);
-        userRepository.save(user);
+        return userRepository.save(user).getId();
     }
 }

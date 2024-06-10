@@ -11,10 +11,15 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:file:./db/data;DATABASE_TO_UPPER=false
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate.dialect: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  sql:
+    init:
+      data-locations: classpath:/static/data/1 order/*.sql
+      mode: always

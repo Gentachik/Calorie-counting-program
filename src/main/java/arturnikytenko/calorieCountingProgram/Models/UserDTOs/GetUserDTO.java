@@ -1,86 +1,25 @@
-package arturnikytenko.calorieCountingProgram.Models;
+package arturnikytenko.calorieCountingProgram.Models.UserDTOs;
 
-import arturnikytenko.calorieCountingProgram.Constraits.StrongPassword;
+import arturnikytenko.calorieCountingProgram.Models.Food;
 import arturnikytenko.calorieCountingProgram.Util.Goal;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 import java.util.Date;
 import java.util.Set;
 
-//TODO connections
-@Entity
-public class UserModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @NotBlank
+public class GetUserDTO {
     private String firstName;
-
-    @NotBlank
     private String lastName;
-
-    @NotBlank
-    @Email
-    @Column(unique = true)
     private String email;
-
-    @NotBlank
-    @Size(min = 8, message = "Password must be at least 8 characters long")
-    @StrongPassword
     private String password;
-
-    @NotNull
-    @Min(18)
     private int age;
-
-    @NotNull
-    @Min(1)
-    @Max(1000)
     private double weight;
-
-    @NotNull
-    @Min(1)
-    @Max(300)
     private double height;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
     private Goal goal;
-
     private Date timeToReachGoal;
-
-    @Min(value = 0, message = "This value should be positive")
     private double weightToChange;
-
     private String gender;
-
-    @OneToMany(mappedBy = "creator")
-    @JsonIgnore
     private Set<Food> createdFoods;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_dislike",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "food_id")
-    )
-    @JsonIgnore
     private Set<Food> dislikedFoods;
-
-    public UserModel() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -120,14 +59,6 @@ public class UserModel {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public double getWeight() {
@@ -170,12 +101,12 @@ public class UserModel {
         this.weightToChange = weightToChange;
     }
 
-    public Set<Food> getDislikedFoods() {
-        return dislikedFoods;
+    public String getGender() {
+        return gender;
     }
 
-    public void setDislikedFoods(Set<Food> dislikedFoods) {
-        this.dislikedFoods = dislikedFoods;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Set<Food> getCreatedFoods() {
@@ -184,5 +115,13 @@ public class UserModel {
 
     public void setCreatedFoods(Set<Food> createdFoods) {
         this.createdFoods = createdFoods;
+    }
+
+    public Set<Food> getDislikedFoods() {
+        return dislikedFoods;
+    }
+
+    public void setDislikedFoods(Set<Food> dislikedFoods) {
+        this.dislikedFoods = dislikedFoods;
     }
 }

@@ -24,12 +24,12 @@
     </div>
     <div>
         <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" th:field="*{weight}" required />
+        <input type="number" step="0.01" id="weight" th:field="*{weight}" required />
         <p class="error" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" th:min="1" th:max="1000">Invalid weight!</p>
     </div>
     <div>
         <label for="height">Height (cm):</label>
-        <input type="number" id="height" th:field="*{height}" required />
+        <input type="number" step="0.01" id="height" th:field="*{height}" required />
         <p class="error" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" th:min="1" th:max="300">Invalid height!</p>
     </div>
     <div class="goal">
