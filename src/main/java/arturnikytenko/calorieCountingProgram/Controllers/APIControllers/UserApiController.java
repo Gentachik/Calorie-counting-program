@@ -3,9 +3,7 @@ package arturnikytenko.calorieCountingProgram.Controllers.APIControllers;
 import arturnikytenko.calorieCountingProgram.Models.UserDTOs.GetUserDTO;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Services.ModelsService;
-import arturnikytenko.calorieCountingProgram.Services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +24,7 @@ public class UserApiController {
 
     @GetMapping("/{id}")
     public ResponseEntity<GetUserDTO> getUserById(@PathVariable int id) {
-        Optional<UserModel> user = modelsService.findById(id);
+        Optional<UserModel> user = modelsService.findUserById(id);
         if (user.isPresent()) {
             UserModel userModel = user.get();
             GetUserDTO userDTO = modelsService.mapUserToGetDTO(userModel);

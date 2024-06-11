@@ -1,7 +1,6 @@
 package arturnikytenko.calorieCountingProgram.Services;
 
 import arturnikytenko.calorieCountingProgram.Models.Food;
-import arturnikytenko.calorieCountingProgram.Models.UserDTOs.GetUserDTO;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Repositories.FoodRepository;
 import arturnikytenko.calorieCountingProgram.Repositories.UserRepository;

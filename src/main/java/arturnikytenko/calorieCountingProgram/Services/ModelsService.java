@@ -24,7 +24,7 @@ public class ModelsService {
         this.foodRepository = foodRepository;
     }
 
-    public Optional<UserModel> findById(int id) {
+    public Optional<UserModel> findUserById(int id) {
         return userRepository.findById(id);
     }
 
@@ -69,5 +69,9 @@ public class ModelsService {
         for (Food food : foodList)
             foodDTOList.add(this.mapFoodToGetDTO(food));
         return foodDTOList;
+    }
+
+    public Optional<Food> findFoodById(int id) {
+        return foodRepository.findById(id);
     }
 }

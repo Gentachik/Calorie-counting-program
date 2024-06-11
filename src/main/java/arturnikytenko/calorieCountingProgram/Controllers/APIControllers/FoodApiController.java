@@ -1,8 +1,7 @@
 package arturnikytenko.calorieCountingProgram.Controllers.APIControllers;
 
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
-import arturnikytenko.calorieCountingProgram.Models.UserDTOs.GetUserDTO;
-import arturnikytenko.calorieCountingProgram.Models.UserModel;
+
 import arturnikytenko.calorieCountingProgram.Services.ModelsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

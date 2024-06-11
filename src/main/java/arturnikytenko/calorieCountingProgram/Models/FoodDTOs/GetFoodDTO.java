@@ -1,8 +1,5 @@
 package arturnikytenko.calorieCountingProgram.Models.FoodDTOs;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-
 public class GetFoodDTO {
     private int id;
     private String name;
