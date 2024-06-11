@@ -1,7 +1,7 @@
 package arturnikytenko.calorieCountingProgram.Models.UserDTOs;
 
 import arturnikytenko.calorieCountingProgram.Models.Food;
-import arturnikytenko.calorieCountingProgram.Util.Goal;
+import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 
 import java.util.Date;
 import java.util.Set;

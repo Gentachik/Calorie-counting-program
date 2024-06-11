@@ -1,3 +1,5 @@
+'use strict';
+
 function getUserIdFromPath() {
     const path = window.location.pathname;
     const segments = path.split('/');

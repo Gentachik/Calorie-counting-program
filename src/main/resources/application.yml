@@ -21,5 +21,5 @@ spring:
     defer-datasource-initialization: true
   sql:
     init:
-      data-locations: classpath:/static/data/1 order/*.sql
+      data-locations: classpath:/static/data/1 order/*.sql, classpath:/static/data/2 order/*.sql
       mode: always

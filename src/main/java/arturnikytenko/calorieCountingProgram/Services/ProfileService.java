@@ -32,22 +32,4 @@ public class ProfileService {
         Food food = new Food(user, carbohydrate, calorie, protein, fat, name);
         foodRepository.save(food);
     }
-
-    public GetUserDTO mapUserToGetDTO(UserModel userModel) {
-        GetUserDTO userDTO = new GetUserDTO();
-        userDTO.setFirstName(userModel.getFirstName());
-        userDTO.setLastName(userModel.getLastName());
-        userDTO.setEmail(userModel.getEmail());
-        userDTO.setPassword(userModel.getPassword());
-        userDTO.setAge(userModel.getAge());
-        userDTO.setWeight(userModel.getWeight());
-        userDTO.setHeight(userModel.getHeight());
-        userDTO.setGoal(userModel.getGoal());
-        userDTO.setTimeToReachGoal(userModel.getTimeToReachGoal());
-        userDTO.setWeightToChange(userModel.getWeightToChange());
-        userDTO.setGender(userModel.getGender());
-        userDTO.setCreatedFoods(userModel.getCreatedFoods());
-        userDTO.setDislikedFoods(userModel.getDislikedFoods());
-        return userDTO;
-    }
 }

@@ -1,4 +1,4 @@
-package arturnikytenko.calorieCountingProgram.Util;
+package arturnikytenko.calorieCountingProgram.Utilities;
 
 public enum Goal {
     maintainWeight,

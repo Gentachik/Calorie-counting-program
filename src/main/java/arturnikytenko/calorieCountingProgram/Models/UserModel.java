@@ -1,9 +1,8 @@
 package arturnikytenko.calorieCountingProgram.Models;
 
 import arturnikytenko.calorieCountingProgram.Constraits.StrongPassword;
-import arturnikytenko.calorieCountingProgram.Util.Goal;
+import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 

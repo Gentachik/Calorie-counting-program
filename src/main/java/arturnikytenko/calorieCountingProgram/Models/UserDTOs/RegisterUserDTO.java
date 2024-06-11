@@ -1,7 +1,7 @@
 package arturnikytenko.calorieCountingProgram.Models.UserDTOs;
 
 import arturnikytenko.calorieCountingProgram.Constraits.StrongPassword;
-import arturnikytenko.calorieCountingProgram.Util.Goal;
+import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.*;
