@@ -16,8 +16,12 @@ const loadSearchResults = async function (query) {
 
 const searchResults = async function () {
     const query = getQuery();
-    const data = await loadSearchResults(query);
     results.innerHTML = '';
+    const data = await loadSearchResults(query);
+    if (data.length === 0) {
+        results.insertAdjacentHTML('afterbegin', `<li>No food for '${query}' were found</li>`);
+        return;
+    }
     data.forEach(food => {
         results.insertAdjacentHTML('afterbegin', `<li className="food">
                     <a className="preview__link" href="food/${food.id}">
