@@ -3,6 +3,7 @@ package arturnikytenko.calorieCountingProgram.Controllers.APIControllers;
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
 
 import arturnikytenko.calorieCountingProgram.Services.ModelsService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class FoodApiController {
         this.modelsService = modelsService;
     }
 
+    @Tag(name = "Get food by search", description = "Get food that matches search value")
     @GetMapping
     public ResponseEntity<List<GetFoodDTO>> getSearchResults(@RequestParam(name = "search") String search) {
         List<GetFoodDTO> foodDTOList = modelsService.findFoodBySearch(search);
