@@ -1,6 +1,5 @@
 package arturnikytenko.calorieCountingProgram.Controllers;
 
-import arturnikytenko.calorieCountingProgram.Models.UserDTOs.PreRegisterUserDTO;
 import arturnikytenko.calorieCountingProgram.Services.ModelsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ public class FoodController {
         if (modelsService.findFoodById(id).isPresent())
             model.addAttribute("food", modelsService.findFoodById(id).get());
         else
-            return "missingPage";
+            return "error";
         return "food";
     }
 }

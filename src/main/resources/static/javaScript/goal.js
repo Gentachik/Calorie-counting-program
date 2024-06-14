@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
             weightElement.remove();
 
         if(selectedGoal === 'gainWeight' || selectedGoal === 'loseWeight'){
-                goalElement.insertAdjacentHTML('afterend',
-                    `<div class="goal__weight">
+            goalElement.insertAdjacentHTML('afterend',
+                `<div class="goal__weight">
                         <label for="weightToChange">Weight (kg, only not negative values) to ${selectedGoal==='gainWeight' ? 'get' : 'lose'}:</label>
                         <input type="number" step="0.01" id="weightToChange" name="weightToChange" required />
                     </div>`);

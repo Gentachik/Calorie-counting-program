@@ -1,72 +1,37 @@
 package arturnikytenko.calorieCountingProgram.Controllers;
 
-import arturnikytenko.calorieCountingProgram.Models.UserDTOs.PreRegisterUserDTO;
-import arturnikytenko.calorieCountingProgram.Models.UserDTOs.RegisterUserDTO;
-import arturnikytenko.calorieCountingProgram.Services.RegisterService;
+
+import arturnikytenko.calorieCountingProgram.Models.UserDTOs.RegisterUserDto;
+import arturnikytenko.calorieCountingProgram.Services.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
-
-import java.util.Objects;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RegisterController {
-    private final RegisterService registerService;
+
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public RegisterController(RegisterService registerService) {
-        this.registerService = registerService;
+    public RegisterController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
-
-    @GetMapping("/preRegister")
-    public String preRegistrationForm(Model model) {
-        model.addAttribute("preRegisterUserDTO", new PreRegisterUserDTO());
-        return "preRegister";
-    }
-
-    @PostMapping("/preRegister")
-    public String preRegistrationForm(@Valid @ModelAttribute("preRegisterUserDTO") PreRegisterUserDTO preRegisterUserDTO,
-                                      BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-        if (registerService.isEmailExist(preRegisterUserDTO.getEmail()))
-            bindingResult.rejectValue("email", "error.preRegisterUserDTO", "This email already exists!");
-
-        if (!Objects.equals(preRegisterUserDTO.getPassword(), preRegisterUserDTO.getRepeatPassword()))
-            bindingResult.rejectValue("password", "error.preRegisterUserDTO", "Passwords do not match!");
-
-        if (bindingResult.hasErrors()) {
-            return "preRegister";
-        }
-        redirectAttributes.addFlashAttribute("email", preRegisterUserDTO.getEmail());
-        redirectAttributes.addFlashAttribute("password", preRegisterUserDTO.getPassword());
-
-        return "redirect:/register";
-    }
-
-    @GetMapping("/register")
-    public String registrationForm(Model model,
-                                   @ModelAttribute("email") String email,
-                                   @ModelAttribute("password") String password) {
-        RegisterUserDTO registerUserDTO = new RegisterUserDTO();
-        registerUserDTO.setEmail(email);
-        registerUserDTO.setPassword(password);
-        model.addAttribute("registerUserDTO", registerUserDTO);
+    @GetMapping("/signup")
+    public String register(Model model){
+        model.addAttribute("registerUserDTO", new RegisterUserDto());
         return "register";
     }
 
-    @PostMapping("/register")
-    public RedirectView registrationForm(@Valid @ModelAttribute("registerUserDTO") RegisterUserDTO registerUserDTO,
-                                         @RequestParam(value = "weightToChange", required = false, defaultValue = "0") double weightToChange,
-                                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new RedirectView("register");
-        }
-        int id = registerService.save(registerUserDTO, weightToChange);
-        return new RedirectView("/profile/" + id);
+
+    @PostMapping("/signup")
+    public ModelAndView register(@ModelAttribute("registerUserDTO") @Valid RegisterUserDto registerUserDto) {
+        authenticationService.signup(registerUserDto);
+
+        return new ModelAndView("redirect:/login");
     }
 }

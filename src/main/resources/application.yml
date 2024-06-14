@@ -1,6 +1,10 @@
 spring:
   application:
     name: CalorieCountingProgram
+  sql:
+    init:
+      mode: never
+      data-locations: classpath:/static/data/2_order/*.sql
   h2:
     console:
       enabled: true
@@ -11,15 +15,16 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:file:./db/data;DATABASE_TO_UPPER=false
   jpa:
-    show-sql: false
+    #    show-sql: true
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate.dialect: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
-  sql:
-    init:
-      data-locations: classpath:/static/data/1 order/*.sql, classpath:/static/data/2 order/*.sql
-      mode: always
+
+security:
+  jwt:
+    secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+    expiration-time: 100800000

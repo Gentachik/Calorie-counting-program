@@ -1,14 +1,8 @@
 'use strict';
 
-function getUserIdFromPath() {
-    const path = window.location.pathname;
-    const segments = path.split('/');
-    return segments[segments.length - 2];
-}
-
-function insertForm(userId) {
+function insertForm() {
     const formHTML = `
-        <form action="/profile/${userId}/newFood" method="post">
+        <form action="/profile/newFood" method="post">
             <div>
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required />
@@ -36,8 +30,7 @@ function insertForm(userId) {
 }
 
 function init(){
-    const id = getUserIdFromPath();
-    insertForm(id);
+    insertForm();
 }
 
 init();

@@ -1,8 +1,8 @@
 'use strict';
 
-async function fetchUserData(userId) {
+async function fetchUserData() {
     try {
-        const res = await fetch(`http://localhost:8080/api/user/${userId}`);
+        const res = await fetch(`http://localhost:8080/api/user/get-current`);
         if (!res.ok) {
             throw new Error('Network response was not ok ' + res.statusText);
         }
@@ -27,37 +27,56 @@ async function fetchUserData(userId) {
 }
 
 function displayUser(user) {
-    document.getElementById('firstName').innerText = user.firstName;
-    document.getElementById('lastName').innerText = user.lastName;
-    document.getElementById('email').innerText = user.email;
-    document.getElementById('gender').innerText = user.gender;
-    document.getElementById('weight').innerText = user.weight;
-    document.getElementById('age').innerText = user.age;
-    document.getElementById('height').innerText = user.height;
-    document.getElementById('goal').innerText = user.goal;
-    document.getElementById('timeToReachGoal').innerText = user.timeToReachGoal;
-    document.getElementById('weightToChange').innerText = user.weightToChange;
-    document.getElementById('dislikedFood').innerText = `${user.dislikedFoods.name} ${user.dislikedFoods.calorie}, ${user.dislikedFoods.protein}, ${user.dislikedFoods.fat}, ${user.dislikedFoods.carbohydrate}`;
+    document.getElementById('firstName').innerText = `First Name: ${user.firstName}`;
+    document.getElementById('lastName').innerText = `Last Name: ${user.lastName}`;
+    document.getElementById('email').innerText = `Email: ${user.email}`;
+    document.getElementById('weight').innerText = `Weight: ${user.weight} kg`;
+    document.getElementById('age').innerText = `Age: ${user.age} years`;
+    document.getElementById('height').innerText = `Height: ${user.height} cm`;
+    document.getElementById('goal').innerText = `Goal: ${user.goal}`;
+
+    if (user.gender) {
+        document.getElementById('gender').innerText = `Gender: ${user.gender}`;
+    } else {
+        document.getElementById('gender').innerText = '';
+    }
+
+    if (user.timeToReachGoal) {
+        document.getElementById('timeToReachGoal').innerText = `Time to Reach Goal: ${user.timeToReachGoal} months`;
+    } else {
+        document.getElementById('timeToReachGoal').innerText = '';
+    }
+
+    if (user.goal !== 'maintainWeight') {
+        document.getElementById('weightToChange').innerText = `Weight to Change: ${user.weightToChange} kg`;
+    } else {
+        document.getElementById('weightToChange').innerText = '';
+    }
+
+    if (user.dislikedFoods && user.dislikedFoods.length > 0) {
+        const dislikedFoodsHTML = user.dislikedFoods.map(food => {
+            return `${food.name} (Calories: ${food.calorie}, Protein: ${food.protein}g, Fat: ${food.fat}g, Carbs: ${food.carbohydrate}g)`;
+        }).join(', ');
+
+        document.getElementById('dislikedFood').innerText = `Disliked Foods: ${dislikedFoodsHTML}`;
+    } else {
+        document.getElementById('dislikedFood').innerText = 'Disliked Foods: None';
+    }
+
     if (user.createdFoods && user.createdFoods.length > 0) {
         const createdFoodsHTML = user.createdFoods.map(food => {
-            return `${food.name} ${food.calorie}, ${food.protein}, ${food.fat}, ${food.carbohydrate}`;
+            return `${food.name} (Calories: ${food.calorie}, Protein: ${food.protein}g, Fat: ${food.fat}g, Carbs: ${food.carbohydrate}g)`;
         }).join(' | ');
 
-        document.getElementById('createdFoods').innerText = `| ${createdFoodsHTML}`;
+        document.getElementById('createdFoods').innerText = `Created Foods: ${createdFoodsHTML}`;
     } else {
-        document.getElementById('createdFoods').innerText = '| No created foods';
+        document.getElementById('createdFoods').innerText = 'Created Foods: None';
     }
 }
 
-function getUserIdFromPath() {
-    const path = window.location.pathname;
-    const segments = path.split('/');
-    return segments[segments.length - 1];
-}
-
-function insertForm(userId) {
+function insertForm() {
     const formHTML = `
-        <form action="/profile/${userId}/newFood" method="get">
+        <form action="/profile/newFood" method="get">
             <button type="submit">Create new Food</button>
         </form>
     `;
@@ -66,10 +85,9 @@ function insertForm(userId) {
 }
 
 async function init() {
-    const id = getUserIdFromPath();
-    const user = await fetchUserData(id);
+    const user = await fetchUserData();
     displayUser(user);
-    insertForm(id);
+    insertForm();
 }
 
 document.addEventListener('DOMContentLoaded', init);

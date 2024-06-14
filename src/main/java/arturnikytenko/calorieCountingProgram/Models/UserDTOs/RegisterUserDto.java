@@ -1,12 +1,12 @@
 package arturnikytenko.calorieCountingProgram.Models.UserDTOs;
 
-import arturnikytenko.calorieCountingProgram.Constraits.StrongPassword;
+
 import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.*;
 
-public class RegisterUserDTO {
+public class RegisterUserDto {
     @NotBlank
     private String firstName;
     @NotBlank
@@ -17,11 +17,11 @@ public class RegisterUserDTO {
     @NotNull
     @Min(1)
     @Max(1000)
-    private double weight; //in kg
+    private double weight;
     @NotNull
     @Min(1)
     @Max(300)
-    private double height; //in cm
+    private double height;
     @NotNull
     @Enumerated(EnumType.STRING)
     private Goal goal;
@@ -30,8 +30,9 @@ public class RegisterUserDTO {
     private String email;
     @NotBlank
     @Size(min = 8, message = "Password must be at least 8 characters long")
-    @StrongPassword
     private String password;
+    @Min(value = 0, message = "This value should be positive")
+    private Double weightToChange = 0.0;
 
     public String getFirstName() {
         return firstName;
@@ -95,5 +96,13 @@ public class RegisterUserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Double  getWeightToChange() {
+        return weightToChange;
+    }
+
+    public void setWeightToChange(Double weightToChange) {
+        this.weightToChange = weightToChange != null ? weightToChange : 0.0;
     }
 }

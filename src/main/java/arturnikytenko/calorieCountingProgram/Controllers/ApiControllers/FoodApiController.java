@@ -1,7 +1,7 @@
-package arturnikytenko.calorieCountingProgram.Controllers.APIControllers;
+package arturnikytenko.calorieCountingProgram.Controllers.ApiControllers;
+
 
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
-
 import arturnikytenko.calorieCountingProgram.Services.ModelsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

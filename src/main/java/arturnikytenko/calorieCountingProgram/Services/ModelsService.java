@@ -1,11 +1,9 @@
 package arturnikytenko.calorieCountingProgram.Services;
 
+
 import arturnikytenko.calorieCountingProgram.Models.Food;
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
-import arturnikytenko.calorieCountingProgram.Models.UserDTOs.GetUserDTO;
-import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Repositories.FoodRepository;
-import arturnikytenko.calorieCountingProgram.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,35 +13,11 @@ import java.util.Optional;
 
 @Service
 public class ModelsService {
-    private final UserRepository userRepository;
     private final FoodRepository foodRepository;
 
     @Autowired
-    public ModelsService(UserRepository userRepository, FoodRepository foodRepository) {
-        this.userRepository = userRepository;
+    public ModelsService(FoodRepository foodRepository) {
         this.foodRepository = foodRepository;
-    }
-
-    public Optional<UserModel> findUserById(int id) {
-        return userRepository.findById(id);
-    }
-
-    public GetUserDTO mapUserToGetDTO(UserModel userModel) {
-        GetUserDTO userDTO = new GetUserDTO();
-        userDTO.setFirstName(userModel.getFirstName());
-        userDTO.setLastName(userModel.getLastName());
-        userDTO.setEmail(userModel.getEmail());
-        userDTO.setPassword(userModel.getPassword());
-        userDTO.setAge(userModel.getAge());
-        userDTO.setWeight(userModel.getWeight());
-        userDTO.setHeight(userModel.getHeight());
-        userDTO.setGoal(userModel.getGoal());
-        userDTO.setTimeToReachGoal(userModel.getTimeToReachGoal());
-        userDTO.setWeightToChange(userModel.getWeightToChange());
-        userDTO.setGender(userModel.getGender());
-        userDTO.setCreatedFoods(userModel.getCreatedFoods());
-        userDTO.setDislikedFoods(userModel.getDislikedFoods());
-        return userDTO;
     }
 
     public GetFoodDTO mapFoodToGetDTO(Food food) {

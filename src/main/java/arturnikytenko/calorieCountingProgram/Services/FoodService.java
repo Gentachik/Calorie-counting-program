@@ -1,5 +1,6 @@
 package arturnikytenko.calorieCountingProgram.Services;
 
+
 import arturnikytenko.calorieCountingProgram.Models.Food;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Repositories.FoodRepository;
@@ -8,21 +9,15 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class ProfileService {
+public class FoodService {
     private final UserRepository userRepository;
     private final FoodRepository foodRepository;
 
     @Autowired
-    public ProfileService(UserRepository userRepository, FoodRepository foodRepository) {
+    public FoodService(UserRepository userRepository, FoodRepository foodRepository) {
         this.userRepository = userRepository;
         this.foodRepository = foodRepository;
-    }
-
-    public Optional<UserModel> findById(int id) {
-        return userRepository.findById(id);
     }
 
     @Transactional

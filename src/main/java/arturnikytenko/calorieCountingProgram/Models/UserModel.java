@@ -1,17 +1,20 @@
 package arturnikytenko.calorieCountingProgram.Models;
 
-import arturnikytenko.calorieCountingProgram.Constraits.StrongPassword;
-import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 //TODO connections
 @Entity
-public class UserModel {
+public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -29,11 +32,11 @@ public class UserModel {
 
     @NotBlank
     @Size(min = 8, message = "Password must be at least 8 characters long")
-    @StrongPassword
     private String password;
 
     @NotNull
     @Min(18)
+    @Max(150)
     private int age;
 
     @NotNull
@@ -57,11 +60,11 @@ public class UserModel {
 
     private String gender;
 
-    @OneToMany(mappedBy = "creator")
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Food> createdFoods;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_dislike",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -105,8 +108,39 @@ public class UserModel {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
