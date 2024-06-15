@@ -1,7 +1,7 @@
 package arturnikytenko.calorieCountingProgram.Services;
 
 
-import arturnikytenko.calorieCountingProgram.Models.FoodModel;
+import arturnikytenko.calorieCountingProgram.Models.Food;
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.CreateFoodDto;
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
@@ -29,27 +29,27 @@ public class FoodService {
     @Transactional
     public void saveNewFood(int userId, CreateFoodDto foodDto) {
         UserModel user = userRepository.findById(userId).orElse(null);
-        FoodModel foodModel = new FoodModel(user, foodDto.getCarbohydrate(), foodDto.getCalorie(), foodDto.getProtein(), foodDto.getFat(), foodDto.getName());
-        foodRepository.save(foodModel);
+        Food food = new Food(user, foodDto.getCarbohydrate(), foodDto.getCalorie(), foodDto.getProtein(), foodDto.getFat(), foodDto.getName());
+        foodRepository.save(food);
     }
     @Transactional
-    public void save(FoodModel foodModel) {
-        foodRepository.save(foodModel);
+    public void save(Food food) {
+        foodRepository.save(food);
     }
     public List<GetFoodDTO> findFoodBySearch(String search) {
-        List<FoodModel> foodModelList;
+        List<Food> foodList;
         List<GetFoodDTO> foodDTOList = new ArrayList<>();
 
         if (!search.isEmpty())
-            foodModelList = foodRepository.findByNameContainingIgnoreCase(search);
+            foodList = foodRepository.findByNameContainingIgnoreCase(search);
         else
-            foodModelList = (List<FoodModel>) foodRepository.findAll();
+            foodList = (List<Food>) foodRepository.findAll();
 
-        for (FoodModel foodModel : foodModelList)
-            foodDTOList.add(new GetFoodDTO(foodModel));
+        for (Food food : foodList)
+            foodDTOList.add(new GetFoodDTO(food));
         return foodDTOList;
     }
-    public Optional<FoodModel> findFoodById(int id) {
+    public Optional<Food> findFoodById(int id) {
         return foodRepository.findById(id);
     }
 

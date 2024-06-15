@@ -7,10 +7,7 @@ import jakarta.validation.constraints.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class UserModel implements UserDetails {
@@ -61,7 +58,7 @@ public class UserModel implements UserDetails {
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<FoodModel> createdFoods;
+    private Set<Food> createdFoods;
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     @JsonIgnore
@@ -74,7 +71,7 @@ public class UserModel implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "food_id")
     )
     @JsonIgnore
-    private Set<FoodModel> dislikedFoods;
+    private Set<Food> dislikedFoods;
 
 
     public UserModel() {
@@ -207,27 +204,27 @@ public class UserModel implements UserDetails {
         this.weightToChange = weightToChange;
     }
 
-    public Set<FoodModel> getDislikedFoods() {
+    public Set<Food> getDislikedFoods() {
         return dislikedFoods;
     }
 
-    public void setDislikedFoods(Set<FoodModel> dislikedFoods) {
+    public void setDislikedFoods(Set<Food> dislikedFoods) {
         this.dislikedFoods = dislikedFoods;
     }
 
-    public Set<FoodModel> getCreatedFoods() {
+    public Set<Food> getCreatedFoods() {
         return createdFoods;
     }
 
-    public void setCreatedFoods(Set<FoodModel> createdFoods) {
+    public void setCreatedFoods(Set<Food> createdFoods) {
         this.createdFoods = createdFoods;
     }
 
-    public Set<FoodModel> getCreatedFoodModels() {
+    public Set<Food> getCreatedFoodModels() {
         return createdFoods;
     }
 
-    public void setCreatedFoodModels(Set<FoodModel> createdFoods) {
+    public void setCreatedFoodModels(Set<Food> createdFoods) {
         this.createdFoods = createdFoods;
     }
 
@@ -245,5 +242,17 @@ public class UserModel implements UserDetails {
 
     public void setCreatedDays(Set<DayModel> createdDays) {
         this.createdDays = createdDays;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserModel userModel = (UserModel) o;
+        return userId == userModel.userId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId);
     }
 }

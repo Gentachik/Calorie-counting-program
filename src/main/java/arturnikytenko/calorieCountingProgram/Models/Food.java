@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class FoodModel {
+public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int foodId;
@@ -31,13 +31,14 @@ public class FoodModel {
     private UserModel creator;
 
     @OneToMany(mappedBy = "food")
+    @JsonIgnore
     Set<FoodDay> foodDays;
 
     @ManyToMany(mappedBy = "dislikedFoods", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserModel> usersThatDislike;
 
-    public FoodModel(UserModel creator, double carbohydrate, double fat, double protein, double calorie, String name) {
+    public Food(UserModel creator, double carbohydrate, double fat, double protein, double calorie, String name) {
         this.creator = creator;
         this.carbohydrate = carbohydrate;
         this.fat = fat;
@@ -46,7 +47,7 @@ public class FoodModel {
         this.name = name;
     }
 
-    public FoodModel() {
+    public Food() {
 
     }
 
@@ -144,8 +145,8 @@ public class FoodModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FoodModel foodModel = (FoodModel) o;
-        return foodId == foodModel.foodId;
+        Food food = (Food) o;
+        return foodId == food.foodId;
     }
 
     @Override
