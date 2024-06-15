@@ -27,7 +27,7 @@
         <label for="goal">Goal:</label>
         <select id="goal" th:field="*{goal}" required>
             <option value="" disabled>Select goal</option>
-            <option th:each="goal : ${T(com.google.arturnikytenko.tpoproject.Utilities.Goal).values()}"
+            <option th:each="goal : ${T(arturnikytenko.calorieCountingProgram.Utilities.Goal).values()}"
                     th:value="${goal}" th:text="${goal}">Goal</option>
         </select>
     </div>

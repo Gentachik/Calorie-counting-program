@@ -4,7 +4,7 @@ spring:
   sql:
     init:
       mode: never
-      data-locations: classpath:/static/data/2_order/*.sql
+      data-locations: classpath:/static/data/1 order/*.sql, classpath:/static/data/2 order/*.sql
   h2:
     console:
       enabled: true

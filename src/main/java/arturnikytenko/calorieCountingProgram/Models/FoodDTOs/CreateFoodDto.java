@@ -1,29 +1,19 @@
 package arturnikytenko.calorieCountingProgram.Models.FoodDTOs;
 
-import arturnikytenko.calorieCountingProgram.Models.Food;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
-public class GetFoodDTO {
-    private int id;
+public class CreateFoodDto {
+    @NotBlank
     private String name;
+    @Min(0)
     private double calorie;
+    @Min(0)
     private double protein;
+    @Min(0)
     private double fat;
+    @Min(0)
     private double carbohydrate;
-    public GetFoodDTO (Food food) {
-        this.setId(food.getId());
-        this.setName(food.getName());
-        this.setCalorie(food.getCalorie());
-        this.setProtein(food.getProtein());
-        this.setCarbohydrate(food.getCarbohydrate());
-        this.setFat(food.getFat());
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

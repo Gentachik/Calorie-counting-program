@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Food</title>
+    <script type="module" src="/javaScript/food.js"></script>
 </head>
 <body>
     <h1 th:text="${food.getName()}">Food Name</h1>
@@ -17,6 +18,9 @@
     </div>
     <div>
         <p>Carbohydrates: <span th:text="${food.getCarbohydrate()}">carbohydrate</span></p>
+    </div>
+    <div class="preference">
+
     </div>
 </body>
 </html>

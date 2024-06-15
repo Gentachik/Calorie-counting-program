@@ -64,7 +64,7 @@ public class UserModel implements UserDetails {
     @JsonIgnore
     private Set<Food> createdFoods;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JoinTable(
             name = "user_dislike",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -75,7 +75,15 @@ public class UserModel implements UserDetails {
 
     public UserModel() {
     }
+    public void addDislikedFood(Food food) {
+        dislikedFoods.add(food);
+        food.getUsersThatDislike().add(this);
+    }
 
+    public void removeDislikedFood(Food food) {
+        dislikedFoods.remove(food);
+        food.getUsersThatDislike().remove(this);
+    }
     public int getId() {
         return id;
     }

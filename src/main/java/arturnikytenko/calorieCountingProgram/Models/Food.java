@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,7 @@ public class Food {
     @JsonIgnore
     private UserModel creator;
 
-    @ManyToMany(mappedBy = "dislikedFoods")
+    @ManyToMany(mappedBy = "dislikedFoods", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserModel> usersThatDislike;
 
@@ -45,7 +46,15 @@ public class Food {
     public Food() {
 
     }
+    public void addDislikedBy(UserModel user) {
+        usersThatDislike.add(user);
+        user.getDislikedFoods().add(this);
+    }
 
+    public void removeDislikedBy(UserModel user) {
+        usersThatDislike.remove(user);
+        user.getDislikedFoods().remove(this);
+    }
     public int getId() {
         return id;
     }
@@ -108,5 +117,17 @@ public class Food {
 
     public void setCreator(UserModel creator) {
         this.creator = creator;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Food food = (Food) o;
+        return id == food.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
