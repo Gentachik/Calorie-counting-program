@@ -1,7 +1,7 @@
 package arturnikytenko.calorieCountingProgram.Controllers.ApiControllers;
 
 
-import arturnikytenko.calorieCountingProgram.Models.Food;
+import arturnikytenko.calorieCountingProgram.Models.FoodModel;
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Services.FoodService;
@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,7 +40,7 @@ public class FoodApiController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserModel user = (UserModel) authentication.getPrincipal();
             Set<Integer> dislikedFoodIds = user.getDislikedFoods().stream()
-                    .map(Food::getId)
+                    .map(FoodModel::getId)
                     .collect(Collectors.toSet());
 
             List<GetFoodDTO> filteredFoodDTOList = foodDTOList.stream()
@@ -66,7 +65,7 @@ public class FoodApiController {
 
             boolean isDisliked = false;
 
-            for (Food f : user.getDislikedFoods()) {
+            for (FoodModel f : user.getDislikedFoods()) {
                 if (f.getId() == id) {
                     isDisliked = true;
                     break;

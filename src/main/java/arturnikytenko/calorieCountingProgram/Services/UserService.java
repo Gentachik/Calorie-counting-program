@@ -1,6 +1,6 @@
 package arturnikytenko.calorieCountingProgram.Services;
 
-import arturnikytenko.calorieCountingProgram.Models.Food;
+import arturnikytenko.calorieCountingProgram.Models.FoodModel;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Repositories.FoodRepository;
 import arturnikytenko.calorieCountingProgram.Repositories.UserRepository;
@@ -28,7 +28,7 @@ public class UserService {
 
     @Transactional
     public void removeFoodById(UserModel user, int foodId) {
-        Optional<Food> food = foodRepository.findById(foodId);
+        Optional<FoodModel> food = foodRepository.findById(foodId);
         if (food.isPresent()) {
             user.getDislikedFoods().remove(food.get());
             userRepository.save(user);
@@ -37,7 +37,7 @@ public class UserService {
 
     @Transactional
     public void addFoodById(UserModel user, int foodId) {
-        Optional<Food> food = foodRepository.findById(foodId);
+        Optional<FoodModel> food = foodRepository.findById(foodId);
         if (food.isPresent()) {
             user.getDislikedFoods().add(food.get());
             userRepository.save(user);

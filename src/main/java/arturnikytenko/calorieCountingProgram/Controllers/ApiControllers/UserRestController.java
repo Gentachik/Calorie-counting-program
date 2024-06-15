@@ -1,7 +1,6 @@
 package arturnikytenko.calorieCountingProgram.Controllers.ApiControllers;
 
-import arturnikytenko.calorieCountingProgram.Models.Food;
-import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
+import arturnikytenko.calorieCountingProgram.Models.FoodModel;
 import arturnikytenko.calorieCountingProgram.Models.UserDTOs.GetUserDTO;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,8 +39,8 @@ public class UserRestController {
         Hibernate.initialize(user.getCreatedFoods());
         Hibernate.initialize(user.getDislikedFoods());
         List<Integer> dislikes = new ArrayList<>();
-        for (Food food : user.getDislikedFoods())
-            dislikes.add(food.getId());
+        for (FoodModel foodModel : user.getDislikedFoods())
+            dislikes.add(foodModel.getId());
 
         return ResponseEntity.ok(dislikes);
     }

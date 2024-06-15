@@ -1,6 +1,6 @@
 package arturnikytenko.calorieCountingProgram.Models.FoodDTOs;
 
-import arturnikytenko.calorieCountingProgram.Models.Food;
+import arturnikytenko.calorieCountingProgram.Models.FoodModel;
 
 public class GetFoodDTO {
     private int id;
@@ -9,13 +9,13 @@ public class GetFoodDTO {
     private double protein;
     private double fat;
     private double carbohydrate;
-    public GetFoodDTO (Food food) {
-        this.setId(food.getId());
-        this.setName(food.getName());
-        this.setCalorie(food.getCalorie());
-        this.setProtein(food.getProtein());
-        this.setCarbohydrate(food.getCarbohydrate());
-        this.setFat(food.getFat());
+    public GetFoodDTO (FoodModel foodModel) {
+        this.setId(foodModel.getId());
+        this.setName(foodModel.getName());
+        this.setCalorie(foodModel.getCalorie());
+        this.setProtein(foodModel.getProtein());
+        this.setCarbohydrate(foodModel.getCarbohydrate());
+        this.setFat(foodModel.getFat());
     }
     public int getId() {
         return id;

@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Food {
+public class FoodModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -34,7 +34,7 @@ public class Food {
     @JsonIgnore
     private Set<UserModel> usersThatDislike;
 
-    public Food(UserModel creator, double carbohydrate, double fat, double protein, double calorie, String name) {
+    public FoodModel(UserModel creator, double carbohydrate, double fat, double protein, double calorie, String name) {
         this.creator = creator;
         this.carbohydrate = carbohydrate;
         this.fat = fat;
@@ -43,7 +43,7 @@ public class Food {
         this.name = name;
     }
 
-    public Food() {
+    public FoodModel() {
 
     }
     public void addDislikedBy(UserModel user) {
@@ -122,8 +122,8 @@ public class Food {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Food food = (Food) o;
-        return id == food.id;
+        FoodModel foodModel = (FoodModel) o;
+        return id == foodModel.id;
     }
 
     @Override

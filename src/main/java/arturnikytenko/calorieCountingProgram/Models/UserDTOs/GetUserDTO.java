@@ -1,7 +1,7 @@
 package arturnikytenko.calorieCountingProgram.Models.UserDTOs;
 
 
-import arturnikytenko.calorieCountingProgram.Models.Food;
+import arturnikytenko.calorieCountingProgram.Models.FoodModel;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 
@@ -20,8 +20,8 @@ public class GetUserDTO {
     private Date timeToReachGoal;
     private double weightToChange;
     private String gender;
-    private Set<Food> createdFoods;
-    private Set<Food> dislikedFoods;
+    private Set<FoodModel> createdFoodModels;
+    private Set<FoodModel> dislikedFoodModels;
 
     public GetUserDTO(UserModel userModel) {
         this.firstName = userModel.getFirstName();
@@ -35,8 +35,8 @@ public class GetUserDTO {
         this.timeToReachGoal = userModel.getTimeToReachGoal();
         this.weightToChange = userModel.getWeightToChange();
         this.gender = userModel.getGender();
-        this.createdFoods = userModel.getCreatedFoods();
-        this.dislikedFoods = userModel.getDislikedFoods();
+        this.createdFoodModels = userModel.getCreatedFoods();
+        this.dislikedFoodModels = userModel.getDislikedFoods();
     }
 
     public String getFirstName() {
@@ -127,19 +127,19 @@ public class GetUserDTO {
         this.gender = gender;
     }
 
-    public Set<Food> getCreatedFoods() {
-        return createdFoods;
+    public Set<FoodModel> getCreatedFoods() {
+        return createdFoodModels;
     }
 
-    public void setCreatedFoods(Set<Food> createdFoods) {
-        this.createdFoods = createdFoods;
+    public void setCreatedFoods(Set<FoodModel> createdFoodModels) {
+        this.createdFoodModels = createdFoodModels;
     }
 
-    public Set<Food> getDislikedFoods() {
-        return dislikedFoods;
+    public Set<FoodModel> getDislikedFoods() {
+        return dislikedFoodModels;
     }
 
-    public void setDislikedFoods(Set<Food> dislikedFoods) {
-        this.dislikedFoods = dislikedFoods;
+    public void setDislikedFoods(Set<FoodModel> dislikedFoodModels) {
+        this.dislikedFoodModels = dislikedFoodModels;
     }
 }

@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New food</title>
+    <title>Calorie counting program</title>
 </head>
 <body>
-<form th:action="@{/profile/newFood}" method="post" th:object="${food}">
+<form th:action="@{/profile/newFood}" method="post" th:object="${foodModel}">
     <div>
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name" th:field="*{name}" required><br><br>

@@ -30,9 +30,10 @@ public class ProfileController {
         model.addAttribute("user", currentUser);
         return new ModelAndView("profile");
     }
+
     @GetMapping("/newFood")
     public ModelAndView getNewFood(Model model) {
-        model.addAttribute("food", new CreateFoodDto());
+        model.addAttribute("foodModel", new CreateFoodDto());
         return new ModelAndView("newFood");
     }
     @PostMapping("/newFood")
@@ -42,4 +43,5 @@ public class ProfileController {
         foodService.saveNewFood(currentUser.getId(), foodDto);
         return new ModelAndView("redirect:/profile");
     }
+
 }
