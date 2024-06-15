@@ -12,7 +12,7 @@ import java.util.Set;
 public class FoodModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int foodId;
 
     @NotBlank
     private String name;
@@ -26,9 +26,12 @@ public class FoodModel {
     private double carbohydrate;
 
     @ManyToOne
-    @JoinColumn(name="creator", nullable=false)
+    @JoinColumn(name = "creator", nullable = false)
     @JsonIgnore
     private UserModel creator;
+
+    @OneToMany(mappedBy = "food")
+    Set<FoodDay> foodDays;
 
     @ManyToMany(mappedBy = "dislikedFoods", fetch = FetchType.EAGER)
     @JsonIgnore
@@ -46,6 +49,7 @@ public class FoodModel {
     public FoodModel() {
 
     }
+
     public void addDislikedBy(UserModel user) {
         usersThatDislike.add(user);
         user.getDislikedFoods().add(this);
@@ -55,12 +59,13 @@ public class FoodModel {
         usersThatDislike.remove(user);
         user.getDislikedFoods().remove(this);
     }
+
     public int getId() {
-        return id;
+        return foodId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.foodId = id;
     }
 
     public String getName() {
@@ -118,16 +123,33 @@ public class FoodModel {
     public void setCreator(UserModel creator) {
         this.creator = creator;
     }
+
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
+
+    public Set<FoodDay> getFoodDays() {
+        return foodDays;
+    }
+
+    public void setFoodDays(Set<FoodDay> foodDays) {
+        this.foodDays = foodDays;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FoodModel foodModel = (FoodModel) o;
-        return id == foodModel.id;
+        return foodId == foodModel.foodId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(foodId);
     }
 }

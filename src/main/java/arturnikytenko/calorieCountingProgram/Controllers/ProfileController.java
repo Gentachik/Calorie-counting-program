@@ -43,5 +43,4 @@ public class ProfileController {
         foodService.saveNewFood(currentUser.getId(), foodDto);
         return new ModelAndView("redirect:/profile");
     }
-
 }

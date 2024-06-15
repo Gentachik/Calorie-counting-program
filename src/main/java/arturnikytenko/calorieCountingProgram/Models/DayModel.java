@@ -3,43 +3,43 @@ package arturnikytenko.calorieCountingProgram.Models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class DayModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private Date day;
+    private int dayId;
     private double neededCalorie;
-    private double neededFat;
-    private double neededCarbs;
     private double neededProtein;
-    private double BMR;
-    private double TDEE;
+    private double neededCarbohydrate;
+    private double neededFat;
 
     @ManyToOne
     @JoinColumn(name = "creator", nullable = false)
     @JsonIgnore
     private UserModel creator;
 
+    @OneToMany(mappedBy = "day")
+    Set<FoodDay> foodDays;
+
     public DayModel() {
     }
 
-    public int getId() {
-        return id;
+    public Set<FoodDay> getFoodDays() {
+        return foodDays;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFoodDays(Set<FoodDay> foodDays) {
+        this.foodDays = foodDays;
     }
 
-    public Date getDay() {
-        return day;
+    public int getDayId() {
+        return dayId;
     }
 
-    public void setDay(Date day) {
-        this.day = day;
+    public void setDayId(int dayId) {
+        this.dayId = dayId;
     }
 
     public double getNeededCalorie() {
@@ -50,22 +50,6 @@ public class DayModel {
         this.neededCalorie = neededCalorie;
     }
 
-    public double getNeededFat() {
-        return neededFat;
-    }
-
-    public void setNeededFat(double neededFat) {
-        this.neededFat = neededFat;
-    }
-
-    public double getNeededCarbs() {
-        return neededCarbs;
-    }
-
-    public void setNeededCarbs(double neededCarbs) {
-        this.neededCarbs = neededCarbs;
-    }
-
     public double getNeededProtein() {
         return neededProtein;
     }
@@ -74,19 +58,27 @@ public class DayModel {
         this.neededProtein = neededProtein;
     }
 
-    public double getBMR() {
-        return BMR;
+    public double getNeededCarbohydrate() {
+        return neededCarbohydrate;
     }
 
-    public void setBMR(double BMR) {
-        this.BMR = BMR;
+    public void setNeededCarbohydrate(double neededCarbohydrate) {
+        this.neededCarbohydrate = neededCarbohydrate;
     }
 
-    public double getTDEE() {
-        return TDEE;
+    public double getNeededFat() {
+        return neededFat;
     }
 
-    public void setTDEE(double TDEE) {
-        this.TDEE = TDEE;
+    public void setNeededFat(double neededFat) {
+        this.neededFat = neededFat;
+    }
+
+    public UserModel getCreator() {
+        return creator;
+    }
+
+    public void setCreator(UserModel creator) {
+        this.creator = creator;
     }
 }

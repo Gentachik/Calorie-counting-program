@@ -16,7 +16,7 @@ import java.util.Set;
 public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int userId;
 
     @NotBlank
     private String firstName;
@@ -61,7 +61,11 @@ public class UserModel implements UserDetails {
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<FoodModel> createdFoodModels;
+    private Set<FoodModel> createdFoods;
+
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<DayModel> createdDays;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JoinTable(
@@ -70,21 +74,18 @@ public class UserModel implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "food_id")
     )
     @JsonIgnore
-    private Set<FoodModel> dislikedFoodModels;
+    private Set<FoodModel> dislikedFoods;
 
-    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<DayModel> days;
 
     public UserModel() {
     }
 
     public int getId() {
-        return id;
+        return userId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getFirstName() {
@@ -207,42 +208,42 @@ public class UserModel implements UserDetails {
     }
 
     public Set<FoodModel> getDislikedFoods() {
-        return dislikedFoodModels;
+        return dislikedFoods;
     }
 
-    public void setDislikedFoods(Set<FoodModel> dislikedFoodModels) {
-        this.dislikedFoodModels = dislikedFoodModels;
+    public void setDislikedFoods(Set<FoodModel> dislikedFoods) {
+        this.dislikedFoods = dislikedFoods;
     }
 
     public Set<FoodModel> getCreatedFoods() {
-        return createdFoodModels;
+        return createdFoods;
     }
 
-    public void setCreatedFoods(Set<FoodModel> createdFoodModels) {
-        this.createdFoodModels = createdFoodModels;
+    public void setCreatedFoods(Set<FoodModel> createdFoods) {
+        this.createdFoods = createdFoods;
     }
 
     public Set<FoodModel> getCreatedFoodModels() {
-        return createdFoodModels;
+        return createdFoods;
     }
 
-    public void setCreatedFoodModels(Set<FoodModel> createdFoodModels) {
-        this.createdFoodModels = createdFoodModels;
+    public void setCreatedFoodModels(Set<FoodModel> createdFoods) {
+        this.createdFoods = createdFoods;
     }
 
-    public Set<FoodModel> getDislikedFoodModels() {
-        return dislikedFoodModels;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setDislikedFoodModels(Set<FoodModel> dislikedFoodModels) {
-        this.dislikedFoodModels = dislikedFoodModels;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public Set<DayModel> getDays() {
-        return days;
+    public Set<DayModel> getCreatedDays() {
+        return createdDays;
     }
 
-    public void setDays(Set<DayModel> days) {
-        this.days = days;
+    public void setCreatedDays(Set<DayModel> createdDays) {
+        this.createdDays = createdDays;
     }
 }
