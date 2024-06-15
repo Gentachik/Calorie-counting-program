@@ -33,7 +33,7 @@ public class ProfileController {
 
     @GetMapping("/newFood")
     public ModelAndView getNewFood(Model model) {
-        model.addAttribute("foodModel", new CreateFoodDto());
+        model.addAttribute("food", new CreateFoodDto());
         return new ModelAndView("newFood");
     }
     @PostMapping("/newFood")

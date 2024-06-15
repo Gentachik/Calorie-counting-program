@@ -2,7 +2,6 @@ package arturnikytenko.calorieCountingProgram.Models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
 
 import java.io.Serializable;
 

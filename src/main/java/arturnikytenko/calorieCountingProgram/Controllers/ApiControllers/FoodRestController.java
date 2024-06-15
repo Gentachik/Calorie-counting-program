@@ -1,7 +1,7 @@
 package arturnikytenko.calorieCountingProgram.Controllers.ApiControllers;
 
 
-import arturnikytenko.calorieCountingProgram.Models.FoodModel;
+import arturnikytenko.calorieCountingProgram.Models.Food;
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Services.FoodService;
@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/food")
-public class FoodApiController {
+public class FoodRestController {
 
     private final FoodService foodService;
     private final UserService userService;
 
     @Autowired
-    public FoodApiController(FoodService foodService, UserService userService) {
+    public FoodRestController(FoodService foodService, UserService userService) {
         this.foodService = foodService;
         this.userService = userService;
     }
@@ -39,19 +39,22 @@ public class FoodApiController {
         if (foodDTOList != null && !foodDTOList.isEmpty()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserModel user = (UserModel) authentication.getPrincipal();
-            Set<Integer> dislikedFoodIds = user.getDislikedFoods().stream()
-                    .map(FoodModel::getId)
-                    .collect(Collectors.toSet());
 
-            List<GetFoodDTO> filteredFoodDTOList = foodDTOList.stream()
-                    .filter(foodDTO -> !dislikedFoodIds.contains(foodDTO.getId()))
-                    .toList();
-
-            if (!filteredFoodDTOList.isEmpty()) {
-                return ResponseEntity.ok(filteredFoodDTOList);
-            } else {
-                return ResponseEntity.notFound().build();
+            if (user.getDislikedFoods().isEmpty()) {
+                Set<Integer> dislikedFoodIds = user.getDislikedFoods().stream()
+                        .map(Food::getId)
+                        .collect(Collectors.toSet());
+                List<GetFoodDTO> filteredFoodDTOList = foodDTOList.stream()
+                        .filter(foodDTO -> !dislikedFoodIds.contains(foodDTO.getId()))
+                        .toList();
+                if (!filteredFoodDTOList.isEmpty()) {
+                    return ResponseEntity.ok(filteredFoodDTOList);
+                } else {
+                    return ResponseEntity.notFound().build();
+                }
             }
+
+            return ResponseEntity.ok(foodDTOList);
         } else
             return ResponseEntity.notFound().build();
     }
@@ -59,24 +62,24 @@ public class FoodApiController {
     @Tag(name = "Change food preference", description = "Change food preference of current user")
     @PostMapping("/{id}/preference")
     public ResponseEntity<?> changePreference(@PathVariable("id") int id) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            UserModel user = (UserModel) authentication.getPrincipal();
-            Hibernate.initialize(user.getDislikedFoods());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserModel user = (UserModel) authentication.getPrincipal();
+        Hibernate.initialize(user.getDislikedFoods());
 
-            boolean isDisliked = false;
+        boolean isDisliked = false;
 
-            for (FoodModel f : user.getDislikedFoods()) {
-                if (f.getId() == id) {
-                    isDisliked = true;
-                    break;
-                }
+        for (Food f : user.getDislikedFoods()) {
+            if (f.getId() == id) {
+                isDisliked = true;
+                break;
             }
-            if (isDisliked) {
-                userService.removeFoodById(user, id);
-                return ResponseEntity.ok(true);
-            } else {
-                userService.addFoodById(user, id);
-                return ResponseEntity.ok(false);
-            }
+        }
+        if (isDisliked) {
+            userService.removeFoodById(user, id);
+            return ResponseEntity.ok(true);
+        } else {
+            userService.addFoodById(user, id);
+            return ResponseEntity.ok(false);
+        }
     }
 }

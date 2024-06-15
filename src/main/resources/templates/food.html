@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Calorie counting program</title>
-    <script type="module" src="/javaScript/foodModel.js"></script>
+    <script type="module" src="/javaScript/food.js"></script>
 </head>
 <body>
-    <h1 th:text="${foodModel.getName()}">Food Name</h1>
+    <h1 th:text="${food.getName()}">Food Name</h1>
     <div>
-        <p>Calories: <span th:text="${foodModel.getCalorie()}">calories</span></p>
+        <p>Calories: <span th:text="${food.getCalorie()}">calories</span></p>
     </div>
     <div>
-        <p>Proteins: <span th:text="${foodModel.getProtein()}">protein</span></p>
+        <p>Proteins: <span th:text="${food.getProtein()}">protein</span></p>
     </div>
     <div>
-        <p>Fats: <span th:text="${foodModel.getFat()}">fat</span></p>
+        <p>Fats: <span th:text="${food.getFat()}">fat</span></p>
     </div>
     <div>
-        <p>Carbohydrates: <span th:text="${foodModel.getCarbohydrate()}">carbohydrate</span></p>
+        <p>Carbohydrates: <span th:text="${food.getCarbohydrate()}">carbohydrate</span></p>
     </div>
     <div class="preference">
 

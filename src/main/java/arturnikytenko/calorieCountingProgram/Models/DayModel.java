@@ -3,6 +3,7 @@ package arturnikytenko.calorieCountingProgram.Models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -14,6 +15,9 @@ public class DayModel {
     private double neededProtein;
     private double neededCarbohydrate;
     private double neededFat;
+    private Date date;
+    private double BMR;
+    private double TDEE;
 
     @ManyToOne
     @JoinColumn(name = "creator", nullable = false)
@@ -21,7 +25,17 @@ public class DayModel {
     private UserModel creator;
 
     @OneToMany(mappedBy = "day")
-    Set<FoodDay> foodDays;
+    @JsonIgnore
+    private Set<FoodDay> foodDays;
+
+    public DayModel(UserModel creator) {
+        this.creator = creator;
+        date = new Date();
+        neededCalorie = 88.362 + ((13.397 * creator.getWeight()) + (4.799 * creator.getHeight()) - (5.677 * creator.getAge()));
+        neededProtein = 56;
+        neededCarbohydrate = neededCalorie * 0.4;
+        neededFat = neededCalorie * 0.3;
+    }
 
     public DayModel() {
     }
@@ -80,5 +94,29 @@ public class DayModel {
 
     public void setCreator(UserModel creator) {
         this.creator = creator;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public double getBMR() {
+        return BMR;
+    }
+
+    public void setBMR(double BMR) {
+        this.BMR = BMR;
+    }
+
+    public double getTDEE() {
+        return TDEE;
+    }
+
+    public void setTDEE(double TDEE) {
+        this.TDEE = TDEE;
     }
 }

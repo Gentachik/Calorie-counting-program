@@ -1,19 +1,23 @@
 package arturnikytenko.calorieCountingProgram.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
 public class FoodDay {
     @EmbeddedId
     private FoodDayKey id;
+
     @ManyToOne
     @MapsId("foodId")
     @JoinColumn(name = "food_id")
-    private FoodModel food;
+    @JsonIgnore
+    private Food food;
 
     @ManyToOne
     @MapsId("dayId")
     @JoinColumn(name = "day_id")
+    @JsonIgnore
     private DayModel day;
 
     public FoodDay() {
@@ -27,11 +31,11 @@ public class FoodDay {
         this.id = id;
     }
 
-    public FoodModel getFood() {
+    public Food getFood() {
         return food;
     }
 
-    public void setFood(FoodModel food) {
+    public void setFood(Food food) {
         this.food = food;
     }
 
