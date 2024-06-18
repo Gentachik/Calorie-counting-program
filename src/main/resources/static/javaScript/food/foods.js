@@ -22,15 +22,16 @@ const searchResults = async function () {
         results.insertAdjacentHTML('afterbegin', `<li>No food for '${query}' were found</li>`);
         return;
     }
+    results.innerHTML = '<h1>Foods:</h1>';
     data.forEach(food => {
-        results.insertAdjacentHTML('afterbegin', `<li className="food">
-                    <a className="preview__link" href="food/${food.id}">
-                        <div className="preview__data">
-                            <h4 className="preview__name">${food.name}</h4>
-                            <h6>${food.calorie}</h6> 
-                            <h6>${food.protein}</h6> 
-                            <h6>${food.fat}</h6> 
-                            <h6>${food.carbohydrate}</h6> 
+        results.insertAdjacentHTML('beforeend', `<li class="food">
+                    <a class="preview__link" href="food/${food.id}">
+                        <div class="preview__data">
+                            <h4 class="preview__name">${food.name}</h4>
+                            <h6>${food.calorie} calories</h6> 
+                            <h6>${food.protein}g protein</h6> 
+                            <h6>${food.fat}g fat</h6> 
+                            <h6>${food.carbohydrate}g carbohydrate</h6> 
                         </div>
                     </a>
                 </li>`);

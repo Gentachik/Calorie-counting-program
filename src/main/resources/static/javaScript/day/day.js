@@ -48,6 +48,7 @@ function displayFoodItems(foods) {
         const actualFat = (food.fat * food.amount) / 100;
 
         const foodItem = document.createElement('div');
+        foodItem.classList.add('food-item')
         foodItem.innerHTML = `
             <p><strong>Food Name:</strong> ${food.name}</p>
             <p><strong>Date:</strong> ${new Date(food.date).toLocaleDateString()}</p>

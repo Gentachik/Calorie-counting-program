@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <title>Calorie counting program</title>
+    <link rel="stylesheet" href="/css/auth/login.css">
 </head>
 <body>
+<h1>Login</h1>
 <form th:action="@{/login}" method="post" th:object="${loginUserDto}">
     <label for="email">Email:</label><br>
     <input type="email" id="email" name="email" th:field="*{email}" required><br><br>

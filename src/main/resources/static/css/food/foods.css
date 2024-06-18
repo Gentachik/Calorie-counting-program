@@ -57,6 +57,10 @@ button.search__btn:hover {
     color: inherit;
 }
 
+.preview__link:hover {
+    background-color: #dcdcdc;
+}
+
 .preview__data h6 {
     margin: 2px 0;
 }

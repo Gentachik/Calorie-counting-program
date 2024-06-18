@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Calorie counting program</title>
+    <link rel="stylesheet" href="/css/profile/newFood.css">
 </head>
 <body>
+<h1>New food</h1>
 <form th:action="@{/profile/new-food}" method="post" th:object="${food}">
     <div>
     <label for="name">Name:</label><br>

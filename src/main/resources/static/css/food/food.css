@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #EE4C7C;
+    margin: 0;
+    padding: 20px;
+    color: white;
+}
+
+
+#foodItems {
+    background-color: #E3AFBC;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: #9A1750;
+}
+
+#food-item {
+    background-color: #E3E2DF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: #9A1750;
+}
+
+p {
+    font-size: 16px;
+    color: #9A1750;
+}
+
+button {
+    background-color: #9A1750;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #6F2232;
+}

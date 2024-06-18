@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>Calorie counting program</title>
     <script type="module" src="/javaScript/auth/goal.js"></script>
+    <link rel="stylesheet" href="/css/auth/register.css">
 </head>
 <body>
-<h2>Registration</h2>
+<h1>Registration</h1>
+
 <form th:action="@{/signup}" method="post" th:object="${registerUserDTO}">
     <label for="firstName">First Name:</label><br>
     <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required><br><br>

@@ -76,7 +76,7 @@ function displayUser(user) {
 
 function insertForm() {
     const formHTML = `
-        <form action="/profile/newFood" method="get">
+        <form action="/profile/new-food" method="get">
             <button type="submit">Create new Food</button>
         </form>
     `;
