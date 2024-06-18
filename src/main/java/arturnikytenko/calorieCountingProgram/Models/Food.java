@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,13 +31,13 @@ public class Food {
     @JsonIgnore
     private UserModel creator;
 
-    @OneToMany(mappedBy = "food")
+    @OneToMany(mappedBy = "food", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JsonIgnore
-    Set<FoodDay> foodDays;
+    Set<FoodDay> foodDays = new HashSet<>();
 
     @ManyToMany(mappedBy = "dislikedFoods", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<UserModel> usersThatDislike;
+    private Set<UserModel> usersThatDislike = new HashSet<>();
 
     public Food(UserModel creator, double carbohydrate, double fat, double protein, double calorie, String name) {
         this.creator = creator;
@@ -48,7 +49,6 @@ public class Food {
     }
 
     public Food() {
-
     }
 
     public void addDislikedBy(UserModel user) {
@@ -152,5 +152,13 @@ public class Food {
     @Override
     public int hashCode() {
         return Objects.hash(foodId);
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "foodId=" + foodId +
+                "foodDays=" + foodDays +
+                '}';
     }
 }

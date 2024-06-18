@@ -1,6 +1,9 @@
 package arturnikytenko.calorieCountingProgram.Models.FoodDTOs;
 
 import arturnikytenko.calorieCountingProgram.Models.Food;
+import arturnikytenko.calorieCountingProgram.Models.FoodDay;
+
+import java.util.Date;
 
 public class GetFoodDTO {
     private int id;
@@ -9,6 +12,8 @@ public class GetFoodDTO {
     private double protein;
     private double fat;
     private double carbohydrate;
+    private Date date;
+    private double amount;
 
     public GetFoodDTO(Food food) {
         this.setId(food.getId());
@@ -17,6 +22,16 @@ public class GetFoodDTO {
         this.setProtein(food.getProtein());
         this.setCarbohydrate(food.getCarbohydrate());
         this.setFat(food.getFat());
+    }
+    public GetFoodDTO(FoodDay foodDay) {
+        this.setId(foodDay.getFood().getId());
+        this.setName(foodDay.getFood().getName());
+        this.setCalorie(foodDay.getFood().getCalorie());
+        this.setProtein(foodDay.getFood().getProtein());
+        this.setCarbohydrate(foodDay.getFood().getCarbohydrate());
+        this.setFat(foodDay.getFood().getFat());
+        this.setDate(foodDay.getAddedAt());
+        this.setAmount(foodDay.getAmount());
     }
 
     public int getId() {
@@ -65,5 +80,21 @@ public class GetFoodDTO {
 
     public void setCarbohydrate(double carbohydrate) {
         this.carbohydrate = carbohydrate;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

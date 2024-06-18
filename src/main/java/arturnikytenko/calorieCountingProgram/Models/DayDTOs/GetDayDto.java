@@ -11,9 +11,8 @@ public class GetDayDto {
     private double neededProtein;
     private double neededCarbohydrate;
     private double neededFat;
-    private double bmr;
-    private double tdee;
-    private Date date;
+    private double bmi;
+    private String date;
     private List<GetFoodDTO> foods;
 
     public GetDayDto(DayModel day) {
@@ -22,8 +21,7 @@ public class GetDayDto {
         neededProtein = day.getNeededProtein();
         neededCarbohydrate = day.getNeededCarbohydrate();
         neededFat = day.getNeededFat();
-        bmr = day.getBMR();
-        tdee = day.getTDEE();
+        bmi = day.getBMI();
     }
 
     public double getNeededCalorie() {
@@ -58,11 +56,11 @@ public class GetDayDto {
         this.neededFat = neededFat;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -74,19 +72,11 @@ public class GetDayDto {
         this.foods = foods;
     }
 
-    public double getBmr() {
-        return bmr;
+    public double getBmi() {
+        return bmi;
     }
 
-    public void setBmr(double bmr) {
-        this.bmr = bmr;
-    }
-
-    public double getTdee() {
-        return tdee;
-    }
-
-    public void setTdee(double tdee) {
-        this.tdee = tdee;
+    public void setBmi(double bmi) {
+        this.bmi = bmi;
     }
 }

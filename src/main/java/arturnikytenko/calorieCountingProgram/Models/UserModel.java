@@ -58,11 +58,11 @@ public class UserModel implements UserDetails {
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<Food> createdFoods;
+    private Set<Food> createdFoods = new HashSet<>();
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<DayModel> createdDays;
+    private Set<DayModel> createdDays = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JoinTable(
@@ -71,7 +71,7 @@ public class UserModel implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "food_id")
     )
     @JsonIgnore
-    private Set<Food> dislikedFoods;
+    private Set<Food> dislikedFoods = new HashSet<>();
 
 
     public UserModel() {
@@ -243,6 +243,7 @@ public class UserModel implements UserDetails {
     public void setCreatedDays(Set<DayModel> createdDays) {
         this.createdDays = createdDays;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

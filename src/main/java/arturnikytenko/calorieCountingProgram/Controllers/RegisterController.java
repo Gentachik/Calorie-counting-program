@@ -24,7 +24,7 @@ public class RegisterController {
     @GetMapping("/signup")
     public String register(Model model){
         model.addAttribute("registerUserDTO", new RegisterUserDto());
-        return "register";
+        return "auth/register";
     }
     @PostMapping("/signup")
     public ModelAndView register(@ModelAttribute("registerUserDTO") @Valid RegisterUserDto registerUserDto) {

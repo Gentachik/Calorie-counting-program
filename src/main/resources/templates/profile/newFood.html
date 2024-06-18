@@ -5,7 +5,7 @@
     <title>Calorie counting program</title>
 </head>
 <body>
-<form th:action="@{/profile/newFood}" method="post" th:object="${food}">
+<form th:action="@{/profile/new-food}" method="post" th:object="${food}">
     <div>
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name" th:field="*{name}" required><br><br>

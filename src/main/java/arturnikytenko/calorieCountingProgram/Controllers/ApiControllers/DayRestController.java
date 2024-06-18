@@ -4,6 +4,7 @@ import arturnikytenko.calorieCountingProgram.Models.DayDTOs.GetDayDto;
 import arturnikytenko.calorieCountingProgram.Models.DayModel;
 import arturnikytenko.calorieCountingProgram.Models.UserModel;
 import arturnikytenko.calorieCountingProgram.Services.DayService;
+import arturnikytenko.calorieCountingProgram.Utilities.GlobalVariables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -25,18 +26,13 @@ public class DayRestController {
     }
 
     @GetMapping("/day")
-    public ResponseEntity<?> a(@RequestParam(name = "date", required = true) String strDate) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-            Date date = sdf.parse(strDate);
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            UserModel currentUser = (UserModel) authentication.getPrincipal();
-            DayModel day = dayService.getDayByDate(date, currentUser);
-            GetDayDto getDay = new GetDayDto(day);
-            return ResponseEntity.ok(getDay);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<?> getDay(@RequestParam(name = "date", required = true) String strDate) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserModel currentUser = (UserModel) authentication.getPrincipal();
+        DayModel day = dayService.getDayByDate(strDate, currentUser);
+        GetDayDto getDay = new GetDayDto(day);
+        getDay.setFoods(dayService.getFoodsForDay(day));
+        return ResponseEntity.ok(getDay);
     }
 }

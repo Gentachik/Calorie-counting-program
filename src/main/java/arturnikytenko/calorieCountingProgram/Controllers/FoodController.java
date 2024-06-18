@@ -24,7 +24,7 @@ public class FoodController {
 
     @GetMapping
     public String seeFoods() {
-        return "foods";
+        return "food/foods";
     }
 
     @GetMapping("{id}")
@@ -36,6 +36,6 @@ public class FoodController {
             model.addAttribute("user", currentUser);
         } else
             return "error";
-        return "food";
+        return "food/food";
     }
 }

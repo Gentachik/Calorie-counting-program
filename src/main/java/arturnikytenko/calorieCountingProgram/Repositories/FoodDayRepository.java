@@ -1,8 +1,12 @@
 package arturnikytenko.calorieCountingProgram.Repositories;
 
+import arturnikytenko.calorieCountingProgram.Models.DayModel;
 import arturnikytenko.calorieCountingProgram.Models.FoodDay;
-import arturnikytenko.calorieCountingProgram.Models.FoodDayKey;
 import org.springframework.data.repository.CrudRepository;
 
-public interface FoodDayRepository extends CrudRepository<FoodDay, FoodDayKey> {
+import java.util.List;
+
+public interface FoodDayRepository extends CrudRepository<FoodDay, Integer> {
+    List<FoodDay> findByDay(DayModel day);
+
 }

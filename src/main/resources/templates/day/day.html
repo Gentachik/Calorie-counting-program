@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Calorie counting program</title>
-    <script type="module" src="/javaScript/day.js"></script>
+    <script type="module" src="/javaScript/day/day.js"></script>
 </head>
 <body>
 <div id="dayDetails">
@@ -13,8 +13,12 @@
     <p><strong>Needed Protein:</strong> <span id="neededProtein"></span></p>
     <p><strong>Needed Carbohydrate:</strong> <span id="neededCarbohydrate"></span></p>
     <p><strong>Needed Fat:</strong> <span id="neededFat"></span></p>
-    <p><strong>BMR:</strong> <span id="bmr"></span></p>
-    <p><strong>TDEE:</strong> <span id="tdee"></span></p>
+    <p><strong>BMI:</strong> <span id="bmi"></span></p>
+    <h3>Food:</h3>
+    <div id="foodItems"></div>
 </div>
+    <form action="#" th:action="@{/day}" method="get">
+        <button type="submit">Go to days</button>
+    </form>
 </body>
 </html>

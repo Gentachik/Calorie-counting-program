@@ -1,9 +1,12 @@
 package arturnikytenko.calorieCountingProgram.Models;
 
+import arturnikytenko.calorieCountingProgram.Utilities.GlobalVariables;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -15,26 +18,31 @@ public class DayModel {
     private double neededProtein;
     private double neededCarbohydrate;
     private double neededFat;
-    private Date date;
-    private double BMR;
-    private double TDEE;
+    private String date;
+    private double BMI;
 
     @ManyToOne
     @JoinColumn(name = "creator", nullable = false)
     @JsonIgnore
     private UserModel creator;
 
-    @OneToMany(mappedBy = "day")
+    @OneToMany(mappedBy = "day", cascade = {CascadeType.PERSIST}, orphanRemoval = true)
     @JsonIgnore
-    private Set<FoodDay> foodDays;
-
+    private Set<FoodDay> foodDays = new HashSet<>();
     public DayModel(UserModel creator) {
         this.creator = creator;
-        date = new Date();
-        neededCalorie = 88.362 + ((13.397 * creator.getWeight()) + (4.799 * creator.getHeight()) - (5.677 * creator.getAge()));
-        neededProtein = 56;
-        neededCarbohydrate = neededCalorie * 0.4;
-        neededFat = neededCalorie * 0.3;
+        date = GlobalVariables.SDF.format(new Date());
+        neededCalorie = 88.362 + ((GlobalVariables.CALORIE_WEIGHT_MULTIPLIER * creator.getWeight()) +
+                (GlobalVariables.CALORIE_HEIGHT_MULTIPLIER * creator.getHeight()) -
+                (GlobalVariables.CALORIE_AGE_MULTIPLIER * creator.getAge()));
+        neededProtein = creator.getWeight();
+        neededCarbohydrate = neededCalorie * GlobalVariables.CARB_PERCENTAGE;
+        neededFat = neededCalorie * GlobalVariables.FAT_PERCENTAGE;
+        switch (creator.getGoal()) {
+            case gainWeight -> this.BMI = neededCalorie * GlobalVariables.BMI_GAIN;
+            case loseWeight -> this.BMI = neededCalorie * GlobalVariables.BMI_LOSS;
+            default -> this.BMI = neededCalorie;
+        }
     }
 
     public DayModel() {
@@ -96,27 +104,39 @@ public class DayModel {
         this.creator = creator;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public double getBMR() {
-        return BMR;
+    public double getBMI() {
+        return BMI;
     }
 
-    public void setBMR(double BMR) {
-        this.BMR = BMR;
+    public void setBMI(double BMI) {
+        this.BMI = BMI;
     }
 
-    public double getTDEE() {
-        return TDEE;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DayModel dayModel = (DayModel) o;
+        return Objects.equals(date, dayModel.date);
     }
 
-    public void setTDEE(double TDEE) {
-        this.TDEE = TDEE;
+    @Override
+    public int hashCode() {
+        return Objects.hash(date);
+    }
+
+    @Override
+    public String toString() {
+        return "DayModel{" +
+                "dayId=" + dayId +
+                '}';
     }
 }

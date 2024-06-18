@@ -28,15 +28,15 @@ public class ProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserModel currentUser = (UserModel) authentication.getPrincipal();
         model.addAttribute("user", currentUser);
-        return new ModelAndView("profile");
+        return new ModelAndView("profile/profile");
     }
 
-    @GetMapping("/newFood")
+    @GetMapping("/new-food")
     public ModelAndView getNewFood(Model model) {
         model.addAttribute("food", new CreateFoodDto());
-        return new ModelAndView("newFood");
+        return new ModelAndView("profile/newFood");
     }
-    @PostMapping("/newFood")
+    @PostMapping("/new-food")
     public ModelAndView postNewFood(@ModelAttribute("food") @Valid CreateFoodDto foodDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserModel currentUser = (UserModel) authentication.getPrincipal();

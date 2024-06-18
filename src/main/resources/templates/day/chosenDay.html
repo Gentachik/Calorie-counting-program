@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calorie counting program</title>
+</head>
+<body>
+<h1 th:text="${food.getName()}">Food Name</h1>
+<div>
+    <p>Calories: <span th:text="${food.getCalorie()}">calories</span></p>
+</div>
+<div>
+    <p>Proteins: <span th:text="${food.getProtein()}">protein per 100g</span></p>
+</div>
+<div>
+    <p>Fats: <span th:text="${food.getFat()}">fat per 100g</span></p>
+</div>
+<div>
+    <p>Carbohydrates: <span th:text="${food.getCarbohydrate()}">carbohydrate per 100g</span></p>
+</div>
+<form th:action="@{/day/add-food/__${food.id}__}" method="post">
+    <label for="amount">Amount in grams:</label><br>
+    <input type="number" step="0.1" id="amount" name="amount" min="0" required><br>
+
+    <input type="hidden" name="date" th:value="${date}"><br>
+
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>
