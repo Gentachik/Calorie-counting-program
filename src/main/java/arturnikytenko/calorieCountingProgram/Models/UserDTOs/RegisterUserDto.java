@@ -5,7 +5,11 @@ import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class RegisterUserDto {
     @NotBlank
     private String firstName;
@@ -33,74 +37,6 @@ public class RegisterUserDto {
     private String password;
     @Min(value = 0, message = "This value should be positive")
     private Double weightToChange = 0.0;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public Goal getGoal() {
-        return goal;
-    }
-
-    public void setGoal(Goal goal) {
-        this.goal = goal;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Double  getWeightToChange() {
-        return weightToChange;
-    }
 
     public void setWeightToChange(Double weightToChange) {
         this.weightToChange = weightToChange != null ? weightToChange : 0.0;

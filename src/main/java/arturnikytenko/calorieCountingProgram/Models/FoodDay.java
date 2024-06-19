@@ -2,10 +2,14 @@ package arturnikytenko.calorieCountingProgram.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 public class FoodDay {
     @Id
@@ -26,46 +30,6 @@ public class FoodDay {
     private Date addedAt;
 
     public FoodDay() {
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public Date getAddedAt() {
-        return addedAt;
-    }
-
-    public void setAddedAt(Date addedAt) {
-        this.addedAt = addedAt;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
-    }
-
-    public DayModel getDay() {
-        return day;
-    }
-
-    public void setDay(DayModel day) {
-        this.day = day;
     }
 
     @Override

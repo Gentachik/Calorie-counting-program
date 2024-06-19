@@ -4,16 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import arturnikytenko.calorieCountingProgram.Utilities.Goal;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
+@Setter
+@Getter
 @Entity
 public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
 
     @NotBlank
     private String firstName;
@@ -77,38 +81,6 @@ public class UserModel implements UserDetails {
     public UserModel() {
     }
 
-    public int getId() {
-        return userId;
-    }
-
-    public void setId(int id) {
-        this.userId = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
@@ -125,135 +97,15 @@ public class UserModel implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public Goal getGoal() {
-        return goal;
-    }
-
-    public void setGoal(Goal goal) {
-        this.goal = goal;
-    }
-
-    public Date getTimeToReachGoal() {
-        return timeToReachGoal;
-    }
-
-    public void setTimeToReachGoal(Date timeToReachGoal) {
-        this.timeToReachGoal = timeToReachGoal;
-    }
-
-    public double getWeightToChange() {
-        return weightToChange;
-    }
-
-    public void setWeightToChange(double weightToChange) {
-        this.weightToChange = weightToChange;
-    }
-
-    public Set<Food> getDislikedFoods() {
-        return dislikedFoods;
-    }
-
-    public void setDislikedFoods(Set<Food> dislikedFoods) {
-        this.dislikedFoods = dislikedFoods;
-    }
-
-    public Set<Food> getCreatedFoods() {
-        return createdFoods;
-    }
-
-    public void setCreatedFoods(Set<Food> createdFoods) {
-        this.createdFoods = createdFoods;
-    }
-
-    public Set<Food> getCreatedFoodModels() {
-        return createdFoods;
-    }
-
-    public void setCreatedFoodModels(Set<Food> createdFoods) {
-        this.createdFoods = createdFoods;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public Set<DayModel> getCreatedDays() {
-        return createdDays;
-    }
-
-    public void setCreatedDays(Set<DayModel> createdDays) {
-        this.createdDays = createdDays;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserModel userModel = (UserModel) o;
-        return userId == userModel.userId;
+        return id == userModel.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId);
+        return Objects.hash(id);
     }
 }

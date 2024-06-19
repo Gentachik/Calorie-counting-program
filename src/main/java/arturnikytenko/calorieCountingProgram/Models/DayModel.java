@@ -3,12 +3,16 @@ package arturnikytenko.calorieCountingProgram.Models;
 import arturnikytenko.calorieCountingProgram.Utilities.GlobalVariables;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Setter
+@Getter
 @Entity
 public class DayModel {
     @Id
@@ -46,78 +50,6 @@ public class DayModel {
     }
 
     public DayModel() {
-    }
-
-    public Set<FoodDay> getFoodDays() {
-        return foodDays;
-    }
-
-    public void setFoodDays(Set<FoodDay> foodDays) {
-        this.foodDays = foodDays;
-    }
-
-    public int getDayId() {
-        return dayId;
-    }
-
-    public void setDayId(int dayId) {
-        this.dayId = dayId;
-    }
-
-    public double getNeededCalorie() {
-        return neededCalorie;
-    }
-
-    public void setNeededCalorie(double neededCalorie) {
-        this.neededCalorie = neededCalorie;
-    }
-
-    public double getNeededProtein() {
-        return neededProtein;
-    }
-
-    public void setNeededProtein(double neededProtein) {
-        this.neededProtein = neededProtein;
-    }
-
-    public double getNeededCarbohydrate() {
-        return neededCarbohydrate;
-    }
-
-    public void setNeededCarbohydrate(double neededCarbohydrate) {
-        this.neededCarbohydrate = neededCarbohydrate;
-    }
-
-    public double getNeededFat() {
-        return neededFat;
-    }
-
-    public void setNeededFat(double neededFat) {
-        this.neededFat = neededFat;
-    }
-
-    public UserModel getCreator() {
-        return creator;
-    }
-
-    public void setCreator(UserModel creator) {
-        this.creator = creator;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public double getBMI() {
-        return BMI;
-    }
-
-    public void setBMI(double BMI) {
-        this.BMI = BMI;
     }
 
     @Override

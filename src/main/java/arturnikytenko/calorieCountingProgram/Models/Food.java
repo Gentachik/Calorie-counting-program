@@ -4,16 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Setter
+@Getter
 @Entity
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int foodId;
+    private int id;
 
     @NotBlank
     private String name;
@@ -51,114 +55,16 @@ public class Food {
     public Food() {
     }
 
-    public void addDislikedBy(UserModel user) {
-        usersThatDislike.add(user);
-        user.getDislikedFoods().add(this);
-    }
-
-    public void removeDislikedBy(UserModel user) {
-        usersThatDislike.remove(user);
-        user.getDislikedFoods().remove(this);
-    }
-
-    public int getId() {
-        return foodId;
-    }
-
-    public void setId(int id) {
-        this.foodId = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getCalorie() {
-        return calorie;
-    }
-
-    public void setCalorie(double calorie) {
-        this.calorie = calorie;
-    }
-
-    public double getProtein() {
-        return protein;
-    }
-
-    public void setProtein(double protein) {
-        this.protein = protein;
-    }
-
-    public double getFat() {
-        return fat;
-    }
-
-    public void setFat(double fat) {
-        this.fat = fat;
-    }
-
-    public double getCarbohydrate() {
-        return carbohydrate;
-    }
-
-    public void setCarbohydrate(double carbohydrate) {
-        this.carbohydrate = carbohydrate;
-    }
-
-    public Set<UserModel> getUsersThatDislike() {
-        return usersThatDislike;
-    }
-
-    public void setUsersThatDislike(Set<UserModel> usersThatDislike) {
-        this.usersThatDislike = usersThatDislike;
-    }
-
-    public UserModel getCreator() {
-        return creator;
-    }
-
-    public void setCreator(UserModel creator) {
-        this.creator = creator;
-    }
-
-    public int getFoodId() {
-        return foodId;
-    }
-
-    public void setFoodId(int foodId) {
-        this.foodId = foodId;
-    }
-
-    public Set<FoodDay> getFoodDays() {
-        return foodDays;
-    }
-
-    public void setFoodDays(Set<FoodDay> foodDays) {
-        this.foodDays = foodDays;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Food food = (Food) o;
-        return foodId == food.foodId;
+        return id == food.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(foodId);
-    }
-
-    @Override
-    public String toString() {
-        return "Food{" +
-                "foodId=" + foodId +
-                "foodDays=" + foodDays +
-                '}';
+        return Objects.hash(id);
     }
 }

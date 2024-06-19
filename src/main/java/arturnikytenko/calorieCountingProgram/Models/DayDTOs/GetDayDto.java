@@ -2,10 +2,13 @@ package arturnikytenko.calorieCountingProgram.Models.DayDTOs;
 
 import arturnikytenko.calorieCountingProgram.Models.DayModel;
 import arturnikytenko.calorieCountingProgram.Models.FoodDTOs.GetFoodDTO;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
+@Setter
+@Getter
 public class GetDayDto {
     private double neededCalorie;
     private double neededProtein;
@@ -24,59 +27,4 @@ public class GetDayDto {
         bmi = day.getBMI();
     }
 
-    public double getNeededCalorie() {
-        return neededCalorie;
-    }
-
-    public void setNeededCalorie(double neededCalorie) {
-        this.neededCalorie = neededCalorie;
-    }
-
-    public double getNeededProtein() {
-        return neededProtein;
-    }
-
-    public void setNeededProtein(double neededProtein) {
-        this.neededProtein = neededProtein;
-    }
-
-    public double getNeededCarbohydrate() {
-        return neededCarbohydrate;
-    }
-
-    public void setNeededCarbohydrate(double neededCarbohydrate) {
-        this.neededCarbohydrate = neededCarbohydrate;
-    }
-
-    public double getNeededFat() {
-        return neededFat;
-    }
-
-    public void setNeededFat(double neededFat) {
-        this.neededFat = neededFat;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public List<GetFoodDTO> getFoods() {
-        return foods;
-    }
-
-    public void setFoods(List<GetFoodDTO> foods) {
-        this.foods = foods;
-    }
-
-    public double getBmi() {
-        return bmi;
-    }
-
-    public void setBmi(double bmi) {
-        this.bmi = bmi;
-    }
 }
